@@ -12,9 +12,155 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import Pinguin from './p.png';
-
+import Pinguin1 from './egg.gif';
+import Pinguin2 from './eggstwo.gif';
+import Pinguin3 from './eggsthree.gif';
+import Button from '@material-ui/core/Button';
 
 import Grid from '@material-ui/core/Grid';
+
+
+
+class App extends React.Component {
+   constructor() {
+      super();
+      this.state = {
+        pinguins:Pinguin1,
+		noOfPinguins:1,
+		state:1
+   }
+this.handleChange = this.handleChange.bind(this);
+this.handleClick = this.handleClick.bind(this);
+   }
+   
+         handleClick(event) {
+		   this.setState({state: 2});
+
+}
+   
+      handleChange(event,value) {
+		  
+		  if(value===1){
+			   this.setState({pinguins: Pinguin1,noOfPinguins:1});
+		  }else if(value===2){
+			   this.setState({pinguins: Pinguin2,noOfPinguins:2});
+		  }else{
+			  this.setState({pinguins: Pinguin3,noOfPinguins:3});
+		  }
+}
+   
+   
+   render() {
+	   
+	   const state = this.state.state;
+	   
+	   let display;
+
+	   if (state===1) {
+      display=
+ <Grid container spacing={3}>
+			 
+   <Grid item xs={3}>
+			<Typography id="discrete-slider" gutterBottom>
+        Select the number of pinguins you want to save
+      </Typography>
+     
+			
+			
+
+           <Slider
+        defaultValue={1}
+        getAriaValueText={valuetext}
+        aria-labelledby="discrete-slider"
+        valueLabelDisplay="auto"
+        step={1}
+        marks
+        min={1}
+        max={5}
+		onChange={this.handleChange}
+      />
+        </Grid>
+			  <Grid item xs={6}>
+			  <div> </div>
+			  </Grid>
+			  
+			   <Grid item xs={6}>
+
+			    {
+				<img style={{width: 500}} src={this.state.pinguins}/>
+            }
+		
+			  </Grid>
+			  <Grid item xs={6}>
+			  <div> </div>
+			  </Grid>
+			  <Grid item xs={6}>
+			  	<Button variant="contained" color="primary" onClick={this.handleClick}>
+        Show me how 
+      </Button>
+			  </Grid>
+			  			  <Grid item xs={6}>
+			  <div> </div>
+			  </Grid>
+		</Grid>
+    } else if (state==2){
+     display=
+	 
+	  <Grid container spacing={3}>
+<Grid item xs={6}>
+you plan to save {this.state.noOfPinguins} pinguins.
+          <PieChart  highcharts={Highcharts} options={options} />
+        </Grid>
+		 <Grid item xs={6}>
+		 {'\u00A0'}
+          <PieChart  highcharts={Highcharts} options={optionsExpensis} />
+        </Grid>
+		<Grid item xs={8}>
+		<Table  size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>Category</TableCell>
+              <TableCell align="right">Expense</TableCell>
+              <TableCell align="right">Carbon</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map(row => (
+              <TableRow key={row.name}>
+                <TableCell component="th" scope="row">
+                  {row.name}
+                </TableCell>
+                <TableCell align="right">{row.expense}</TableCell>
+                <TableCell align="right">{row.carbon}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+		</Grid>
+      		</Grid>
+    }
+	   
+      return (
+         <div>
+            <Header/>
+
+			{display}
+
+					 
+         </div>
+      );
+   }
+}
+class Header extends React.Component {
+   render() {
+      return (
+         <div>
+            <h1>Save the Pinguins</h1>
+         </div>
+      );
+   }
+}
+
 
 
 
@@ -207,115 +353,6 @@ const optionsExpensis = {
     }
   ]
 };
-
-
-class App extends React.Component {
-   constructor() {
-      super();
-      this.state = {
-        pinguins:["p"]
-   }
-this.handleChange = this.handleChange.bind(this);
-   }
-   
-      handleChange(event) {
-		  
-		  var tmp = [];
-var i;
-		  for (i = 0; event.target.value; i++) {
-					tmp.push("p");
-				}
-		  
-  this.setState({pinguins: tmp});
-  console.log("changed");
-}
-   
-   
-   render() {
-      return (
-         <div>
-            <Header/>
-
-			<Typography id="discrete-slider" gutterBottom>
-        Select the number of pinguins you want to save
-      </Typography>
-     
-			
-			
-			 <Grid container spacing={3}>
-			 
-			         <Grid item xs={3}>
-           <Slider
-        defaultValue={1}
-        getAriaValueText={valuetext}
-        aria-labelledby="discrete-slider"
-        valueLabelDisplay="auto"
-        step={1}
-        marks
-        min={1}
-        max={5}
-		onChange={this.handleChange}
-      />
-        </Grid>
-			  <Grid item xs={6}>
-			  <div> </div>
-			  </Grid>
-			  
-			   <Grid item xs={6}>
-
-			    {this.state.pinguins.map(row => (
-				<img src={Pinguin}/>
-            ))}
-			   
-					
-
-
-			  </Grid>
-			  
-        <Grid item xs={6}>
-          <PieChart  highcharts={Highcharts} options={options} />
-        </Grid>
-		 <Grid item xs={6}>
-          <PieChart  highcharts={Highcharts} options={optionsExpensis} />
-        </Grid>
-		<Grid item xs={8}>
-		<Table  size="small">
-          <TableHead>
-            <TableRow>
-              <TableCell>Category</TableCell>
-              <TableCell align="right">Expense</TableCell>
-              <TableCell align="right">Carbon</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map(row => (
-              <TableRow key={row.name}>
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell align="right">{row.expense}</TableCell>
-                <TableCell align="right">{row.carbon}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-		</Grid>
-		</Grid>
-			 
-					 
-         </div>
-      );
-   }
-}
-class Header extends React.Component {
-   render() {
-      return (
-         <div>
-            <h1>Header</h1>
-         </div>
-      );
-   }
-}
 
 
 export default App;
