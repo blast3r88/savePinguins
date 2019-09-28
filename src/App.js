@@ -196,11 +196,8 @@ this.handleToggle=this.handleToggle.bind(this);
 				
 			 }else{
 				 tmpState[sender]=true;
-				  tmpState[sender]=false;
-				 
-
 			 }
-		   		   this.setState({state: tmpState});
+		   		   this.setState({tooltip: tmpState});
 		   
 		   console.log(sender);
 
