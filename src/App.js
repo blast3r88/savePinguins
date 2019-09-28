@@ -360,7 +360,7 @@ pane: {
 			 
    <Grid item xs={3}>
 			<Typography id="discrete-slider" gutterBottom>
-        Select the number of pinguins you want to save
+        Select the number of penguins you want to save
       </Typography>
      
 			
@@ -769,7 +769,7 @@ class Header extends React.Component {
    render() {
       return (
          <div>
-            <h1>Save the Pinguins</h1>
+            <h1>Save the Penguins</h1>
          </div>
       );
    }
