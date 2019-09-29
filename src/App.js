@@ -73,7 +73,7 @@ class App extends React.Component {
       this.state = {
         pinguins:Pinguin1,
 		noOfPinguins:1,
-		state:5,
+		state:1,
 		people:1,
 		tooltip:[false,false,false,false],
 		friends:[false,false,false,false],
