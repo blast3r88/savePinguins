@@ -34,6 +34,7 @@ import ShoppingIcon from '@material-ui/icons/ShoppingCart';
 import EcoIcon from '@material-ui/icons/Eco';
 import UpIcon from '@material-ui/icons/ArrowUpward';
 import DownIcon from '@material-ui/icons/ArrowDownward';
+import Cup from '@material-ui/icons/EmojiEvents';
 
 import Divider from '@material-ui/core/Divider';
 
@@ -60,6 +61,8 @@ import Hatched from './hatched.gif';
 import Pinguins2 from './pinguins2.gif';
 import Island from './island.png';
 
+import Chip from '@material-ui/core/Chip';
+
 // Import Highcharts
 import highchartsMore from "highcharts/highcharts-more.js";
 import solidGauge from "highcharts/modules/solid-gauge.js";
@@ -70,7 +73,7 @@ class App extends React.Component {
       this.state = {
         pinguins:Pinguin1,
 		noOfPinguins:1,
-		state:4,
+		state:5,
 		people:1,
 		tooltip:[false,false,false,false],
 		friends:[false,false,false,false],
@@ -1017,6 +1020,11 @@ ref="chartComponent1"/>
 		{<img style={{width: 1000}} src={Island}/>}
 		
 </Grid>
+      <Chip
+	  avatar={<Avatar alt="Dora" src={pictures[3]} />}
+        label="Penguin Saver Superhero"
+        deleteIcon={Cup}
+      />
 </Grid>
 	}
 	
