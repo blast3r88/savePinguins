@@ -19,6 +19,8 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
+import Tooltip from '@material-ui/core/Tooltip';
+
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -60,6 +62,9 @@ import P4 from './4.jpg';
 import Hatched from './hatched.gif';
 import Pinguins2 from './pinguins2.gif';
 import Island from './island.png';
+
+import Dollar from './dollar.png';
+import Carbon from './carbon.png';
 
 import Chip from '@material-ui/core/Chip';
 
@@ -204,7 +209,7 @@ generateOptionsGauge(state,user){
        
     },
   title: {
-        text: user+' reduction goals',
+        text: user+' reduction progress',
         style: {
             fontSize: '24px'
         }
@@ -454,7 +459,7 @@ pane: {
 	   const tooltip = this.state.tooltip;
 	   let display;
 	   
-	   const names = ["Peter","Bob","Nicole","Dora"];
+	   const names = ["Peter","Bob","Nicole","Lisa"];
 
 	   var pictures=[P1,P2,P3,P4];
 	   
@@ -463,8 +468,10 @@ pane: {
 	   if (state===1) {
       display=
  <Grid container spacing={3}>
-			 
-   <Grid item xs={3}>
+			
+<Grid item xs={3}>
+			</Grid>
+   <Grid item xs={6}>
 			<Typography id="discrete-slider" gutterBottom>
         Select the number of penguins you want to save
       </Typography>
@@ -482,15 +489,17 @@ pane: {
         min={1}
         max={5}
 		onChange={this.handleChange}
+		
       />
         </Grid>
-			  <Grid item xs={6}>
+
+			  <Grid item xs={4}>
 			  <div> </div>
 			  </Grid>
 			  
 			   <Grid item xs={6}>
 
-			    {<img style={{width: 500}} src={this.state.pinguins}/>}
+			    {<img style={{width: 1000}} src={this.state.pinguins}/>}
 		
 			  </Grid>
 			  <Grid item xs={6}>
@@ -510,13 +519,17 @@ pane: {
 	 
 	  <Grid container spacing={3}>
 <Grid item xs={6}>
-you plan to save {this.state.noOfPinguins} pinguins.
+You set the mission to save {this.state.noOfPinguins} penguins.
           <PieChart  highcharts={Highcharts} options={options} />
         </Grid>
 		 <Grid item xs={6}>
 		 {'\u00A0'}
           <PieChart  highcharts={Highcharts} options={optionsExpensis} />
         </Grid>
+		<Grid item xs={2}>
+		 <div></div>
+		 </Grid>
+		 	<Tooltip disableHoverListener title="Add">
 		<Grid item xs={8}>
 		<Table  size="small">
           <TableHead>
@@ -539,10 +552,13 @@ you plan to save {this.state.noOfPinguins} pinguins.
           </TableBody>
         </Table>
 		</Grid>
-		
+			</Tooltip>
+		<Grid item xs={2}>
+		 <div></div>
+		 </Grid>
 		<Grid item xs={6}>
 							  	<Button variant="contained" color="primary" onClick={this.handleClick}>
-        Start the challange 
+        Start the challenge 
       </Button>
 	  </Grid>
       		</Grid>
@@ -558,17 +574,24 @@ solidGauge(Highcharts);
    
     <List>
 
+
 	
+	
+		   
       <ListItem button onClick={()=>this.handleCloseOpen(0)}>
+
         <ListItemAvatar>
           <Avatar>
             <TransportationIcon />
           </Avatar>
         </ListItemAvatar>
+
 		<DownIcon  color="error"/>
         <ListItemText primary="Mobility" secondary={ Math.round(target[0]/this.state.people*100 * 100) / 100  +'%'} />
 		{tooltip[0] ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
+
+	  
 	  <Collapse in={tooltip[0]} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <ListItem button>
@@ -850,7 +873,7 @@ ref="chartComponent1"/>
 	</Grid>	
 			<Grid item xs={6}>
 							  	<Button variant="contained" color="primary" onClick={this.handleClick}>
-        Start the challange 
+        Start the challenge 
       </Button>			
 </Grid>	  
       		</Grid>
@@ -1015,16 +1038,14 @@ ref="chartComponent1"/>
 	}else if (state===6){
 		display=
 		<Grid container spacing={3}>
-<Grid item xs={6}>
+		<Grid item xs={2} >
+		</Grid>
+<Grid item xs={12} >
 
-		{<img style={{width: 1000}} src={Island}/>}
+		{<img align="center" style={{width: 1000}} src={Island}/>}
 		
 </Grid>
-      <Chip
-	  avatar={<Avatar alt="Dora" src={pictures[3]} />}
-        label="Penguin Saver Superhero"
-        deleteIcon={Cup}
-      />
+
 </Grid>
 	}
 	
@@ -1044,7 +1065,8 @@ class Header extends React.Component {
    render() {
       return (
          <div>
-            <h1>Save the Penguins</h1>
+            <h1 align="center">Raise a Penguin Colony to Save the Earth</h1>
+
          </div>
       );
    }
@@ -1191,7 +1213,8 @@ function valuetext(value) {
 const options = {
   chart: {
     type: "pie"
-  }, title: {
+  },
+  title: {
         text: 'Spending based on categories'
     },
   series: [
