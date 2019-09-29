@@ -56,6 +56,9 @@ import P1 from './1.jpg';
 import P2 from './2.jpg';
 import P3 from './3.jpg';
 import P4 from './4.jpg';
+import Hatched from './hatched.gif';
+import Pinguins2 from './pinguins2.gif';
+import Island from './island.png';
 
 // Import Highcharts
 import highchartsMore from "highcharts/highcharts-more.js";
@@ -67,7 +70,7 @@ class App extends React.Component {
       this.state = {
         pinguins:Pinguin1,
 		noOfPinguins:1,
-		state:1,
+		state:4,
 		people:1,
 		tooltip:[false,false,false,false],
 		friends:[false,false,false,false],
@@ -179,6 +182,7 @@ this.handleChange = this.handleChange.bind(this);
 this.handleClick = this.handleClick.bind(this);
 this.handleCloseOpen = this.handleCloseOpen.bind(this);
 this.handleToggle=this.handleToggle.bind(this);
+this.generateOptionsGauge=this.generateOptionsGauge.bind(this);
    }
    
          handleClick(event) {
@@ -186,6 +190,108 @@ this.handleToggle=this.handleToggle.bind(this);
 			 tmpState= tmpState+1;
 		   this.setState({state: tmpState});
 
+}
+
+generateOptionsGauge(state,user){
+ return	 {
+  chart: {
+        type: 'solidgauge',
+        height: '30%',
+
+       
+    },
+  title: {
+        text: user+' reduction goals',
+        style: {
+            fontSize: '24px'
+        }
+    },
+tooltip: {
+        borderWidth: 0,
+        backgroundColor: 'none',
+        shadow: false,
+        style: {
+            fontSize: '16px'
+        },
+        pointFormat: '{series.name}<br><span style="font-size:2em; color: {point.color}; font-weight: bold">{point.y}%</span>',
+        positioner: function (labelWidth) {
+            return {
+                x: (this.chart.chartWidth - labelWidth) / 2,
+                y: (this.chart.plotHeight / 2) + 15
+            };
+        }
+    },
+pane: {
+        startAngle: 0,
+        endAngle: 360,
+        background: [{ // Track for Move
+            outerRadius: '112%',
+            innerRadius: '88%',
+            backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[0])
+                .setOpacity(0.3)
+                .get(),
+            borderWidth: 0
+        }, { // Track for Exercise
+            outerRadius: '87%',
+            innerRadius: '63%',
+            backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[1])
+                .setOpacity(0.3)
+                .get(),
+            borderWidth: 0
+        }, { // Track for Stand
+            outerRadius: '62%',
+            innerRadius: '38%',
+            backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[2])
+                .setOpacity(0.3)
+                .get(),
+            borderWidth: 0
+        }]
+    },
+
+    yAxis: {
+        min: 0,
+        max: 100,
+        lineWidth: 0,
+        tickPositions: []
+    },
+
+    plotOptions: {
+        solidgauge: {
+            dataLabels: {
+                enabled: false
+            },
+            linecap: 'round',
+            stickyTracking: false,
+            rounded: true
+        }
+    },
+	series: [{
+        name: 'Move',
+		
+        data: [{
+            color: Highcharts.getOptions().colors[0],
+            radius: '112%',
+            innerRadius: '88%',
+            y:(Math.floor(Math.random() * 5) + 1)*10*state
+        }]
+    }, {
+        name: 'Exercise',
+        data: [{
+            color: Highcharts.getOptions().colors[1],
+            radius: '87%',
+            innerRadius: '63%',
+            y:(Math.floor(Math.random() * 5) + 1)*10*state
+        }]
+    }, {
+        name: 'Stand',
+        data: [{
+            color: Highcharts.getOptions().colors[2],
+            radius: '62%',
+            innerRadius: '38%',
+            y:(Math.floor(Math.random() *5) + 1)*10*state
+        }]
+    }]
+};
 }
 
  handleCloseOpen(sender) {
@@ -749,7 +855,171 @@ ref="chartComponent1"/>
 
 			
 
+	}else if (state===4){
+
+highchartsMore(Highcharts);
+solidGauge(Highcharts);
+display=
+
+<Grid container spacing={3}>
+<Grid item xs={6}>
+<HighchartsReact
+highcharts={Highcharts}
+options={optionsGauge}
+ref="chartComponent1"/>
+</Grid>
+<Grid item xs={6}>
+ {<img style={{width: 600}} src={Hatched}/>}
+	</Grid>	
+
+
+	<Grid item xs={6}>
+	<Paper>
+	<Avatar
+                alt={`Avatar n°${0 + 1}`}
+                src={pictures[0]}
+              />
+<HighchartsReact
+highcharts={Highcharts}
+options={this.generateOptionsGauge(1,"Peter")}
+ref="chartComponent1"/>
+</Paper>
+</Grid>
+
+	<Grid item xs={6}>
+	<Paper>
+	<Avatar
+                alt={`Avatar n°${1 + 1}`}
+                src={pictures[1]}
+              />
+<HighchartsReact
+highcharts={Highcharts}
+options={this.generateOptionsGauge(1,"Bob")}
+ref="chartComponent1"/>
+</Paper>
+</Grid>
+
+	<Grid item xs={6}>
+	<Paper>
+	<Avatar
+                alt={`Avatar n°${2 + 1}`}
+                src={pictures[2]}
+              />
+<HighchartsReact
+highcharts={Highcharts}
+options={this.generateOptionsGauge(1,"Nicole")}
+ref="chartComponent1"/>
+</Paper>
+</Grid>
+
+	<Grid item xs={6}>
+	<Paper>
+	<Avatar
+                alt={`Avatar n°${3 + 1}`}
+                src={pictures[3]}
+              />
+<HighchartsReact
+highcharts={Highcharts}
+options={this.generateOptionsGauge(1,"Dora")}
+ref="chartComponent1"/>
+</Paper>
+</Grid>
+				<Grid item xs={6}>
+							  	<Button variant="contained" color="primary" onClick={this.handleClick}>
+        Finish the challange 
+      </Button>			
+</Grid>	 
+</Grid>
+
+
+	}else if (state===5){
+
+highchartsMore(Highcharts);
+solidGauge(Highcharts);
+display=
+
+<Grid container spacing={3}>
+<Grid item xs={6}>
+<HighchartsReact
+highcharts={Highcharts}
+options={optionsGauge2}
+ref="chartComponent1"/>
+</Grid>
+<Grid item xs={6}>
+ {<img style={{width: 600}} src={Pinguins2}/>}
+	</Grid>	
+
+
+	<Grid item xs={6}>
+	<Paper>
+	<Avatar
+                alt={`Avatar n°${0 + 1}`}
+                src={pictures[0]}
+              />
+<HighchartsReact
+highcharts={Highcharts}
+options={this.generateOptionsGauge(2,"Peter")}
+ref="chartComponent1"/>
+</Paper>
+</Grid>
+
+	<Grid item xs={6}>
+	<Paper>
+	<Avatar
+                alt={`Avatar n°${1 + 1}`}
+                src={pictures[1]}
+              />
+<HighchartsReact
+highcharts={Highcharts}
+options={this.generateOptionsGauge(2,"Bob")}
+ref="chartComponent1"/>
+</Paper>
+</Grid>
+
+	<Grid item xs={6}>
+	<Paper>
+	<Avatar
+                alt={`Avatar n°${2 + 1}`}
+                src={pictures[2]}
+              />
+<HighchartsReact
+highcharts={Highcharts}
+options={this.generateOptionsGauge(2,"Nicole")}
+ref="chartComponent1"/>
+</Paper>
+</Grid>
+
+	<Grid item xs={6}>
+	<Paper>
+	<Avatar
+                alt={`Avatar n°${3 + 1}`}
+                src={pictures[3]}
+              />
+<HighchartsReact
+highcharts={Highcharts}
+options={this.generateOptionsGauge(2,"Dora")}
+ref="chartComponent1"/>
+</Paper>
+</Grid>
+				<Grid item xs={6}>
+							  	<Button variant="contained" color="primary" onClick={this.handleClick}>
+        To my Penguin island
+      </Button>			
+</Grid>	 
+</Grid>
+
+
+	}else if (state===6){
+		display=
+		<Grid container spacing={3}>
+<Grid item xs={6}>
+
+		{<img style={{width: 1000}} src={Island}/>}
+		
+</Grid>
+</Grid>
 	}
+	
 	   
       return (
          <div>
@@ -969,7 +1239,202 @@ const optionsExpensis = {
     }
   ]
 };
+const optionsGauge = {
+  chart: {
+        type: 'solidgauge',
+        height: '55%',
 
+       
+    },
+  title: {
+        text: 'Your team reduction progress',
+        style: {
+            fontSize: '24px'
+        }
+    },
+tooltip: {
+        borderWidth: 0,
+        backgroundColor: 'none',
+        shadow: false,
+        style: {
+            fontSize: '16px'
+        },
+        pointFormat: '{series.name}<br><span style="font-size:2em; color: {point.color}; font-weight: bold">{point.y}%</span>',
+        positioner: function (labelWidth) {
+            return {
+                x: (this.chart.chartWidth - labelWidth) / 2,
+                y: (this.chart.plotHeight / 2) + 15
+            };
+        }
+    },
+pane: {
+        startAngle: 0,
+        endAngle: 360,
+        background: [{ // Track for Move
+            outerRadius: '112%',
+            innerRadius: '88%',
+            backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[0])
+                .setOpacity(0.3)
+                .get(),
+            borderWidth: 0
+        }, { // Track for Exercise
+            outerRadius: '87%',
+            innerRadius: '63%',
+            backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[1])
+                .setOpacity(0.3)
+                .get(),
+            borderWidth: 0
+        }, { // Track for Stand
+            outerRadius: '62%',
+            innerRadius: '38%',
+            backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[2])
+                .setOpacity(0.3)
+                .get(),
+            borderWidth: 0
+        }]
+    },
+
+    yAxis: {
+        min: 0,
+        max: 100,
+        lineWidth: 0,
+        tickPositions: []
+    },
+
+    plotOptions: {
+        solidgauge: {
+            dataLabels: {
+                enabled: false
+            },
+            linecap: 'round',
+            stickyTracking: false,
+            rounded: true
+        }
+    },
+  series: [{
+        name: 'Move',
+        data: [{
+            color: Highcharts.getOptions().colors[0],
+            radius: '112%',
+            innerRadius: '88%',
+            y: 80
+        }]
+    }, {
+        name: 'Exercise',
+        data: [{
+            color: Highcharts.getOptions().colors[1],
+            radius: '87%',
+            innerRadius: '63%',
+            y: 65
+        }]
+    }, {
+        name: 'Stand',
+        data: [{
+            color: Highcharts.getOptions().colors[2],
+            radius: '62%',
+            innerRadius: '38%',
+            y: 50
+        }]
+    }]
+};
+const optionsGauge2 = {
+  chart: {
+        type: 'solidgauge',
+        height: '55%',
+
+       
+    },
+  title: {
+        text: 'Your team reduction progress',
+        style: {
+            fontSize: '24px'
+        }
+    },
+tooltip: {
+        borderWidth: 0,
+        backgroundColor: 'none',
+        shadow: false,
+        style: {
+            fontSize: '16px'
+        },
+        pointFormat: '{series.name}<br><span style="font-size:2em; color: {point.color}; font-weight: bold">{point.y}%</span>',
+        positioner: function (labelWidth) {
+            return {
+                x: (this.chart.chartWidth - labelWidth) / 2,
+                y: (this.chart.plotHeight / 2) + 15
+            };
+        }
+    },
+pane: {
+        startAngle: 0,
+        endAngle: 360,
+        background: [{ // Track for Move
+            outerRadius: '112%',
+            innerRadius: '88%',
+            backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[0])
+                .setOpacity(0.3)
+                .get(),
+            borderWidth: 0
+        }, { // Track for Exercise
+            outerRadius: '87%',
+            innerRadius: '63%',
+            backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[1])
+                .setOpacity(0.3)
+                .get(),
+            borderWidth: 0
+        }, { // Track for Stand
+            outerRadius: '62%',
+            innerRadius: '38%',
+            backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[2])
+                .setOpacity(0.3)
+                .get(),
+            borderWidth: 0
+        }]
+    },
+
+    yAxis: {
+        min: 0,
+        max: 100,
+        lineWidth: 0,
+        tickPositions: []
+    },
+
+    plotOptions: {
+        solidgauge: {
+            dataLabels: {
+                enabled: false
+            },
+            linecap: 'round',
+            stickyTracking: false,
+            rounded: true
+        }
+    },
+  series: [{
+        name: 'Move',
+        data: [{
+            color: Highcharts.getOptions().colors[0],
+            radius: '112%',
+            innerRadius: '88%',
+            y: 100
+        }]
+    }, {
+        name: 'Exercise',
+        data: [{
+            color: Highcharts.getOptions().colors[1],
+            radius: '87%',
+            innerRadius: '63%',
+            y: 100
+        }]
+    }, {
+        name: 'Stand',
+        data: [{
+            color: Highcharts.getOptions().colors[2],
+            radius: '62%',
+            innerRadius: '38%',
+            y: 80
+        }]
+    }]
+};
 
 export default App;
 
